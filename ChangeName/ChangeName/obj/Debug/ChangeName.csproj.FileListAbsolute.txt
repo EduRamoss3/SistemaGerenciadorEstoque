@@ -1,0 +1,11 @@
+C:\Users\Eduardo\source\repos\MeusProgramasDesktop\ChangeName\ChangeName\obj\Debug\ChangeName.csproj.AssemblyReference.cache
+C:\Users\Eduardo\source\repos\MeusProgramasDesktop\ChangeName\ChangeName\obj\Debug\ChangeName.csproj.SuggestedBindingRedirects.cache
+C:\Users\Eduardo\source\repos\MeusProgramasDesktop\ChangeName\ChangeName\obj\Debug\ChangeName.Form1.resources
+C:\Users\Eduardo\source\repos\MeusProgramasDesktop\ChangeName\ChangeName\obj\Debug\ChangeName.Properties.Resources.resources
+C:\Users\Eduardo\source\repos\MeusProgramasDesktop\ChangeName\ChangeName\obj\Debug\ChangeName.csproj.GenerateResource.cache
+C:\Users\Eduardo\source\repos\MeusProgramasDesktop\ChangeName\ChangeName\obj\Debug\ChangeName.csproj.CoreCompileInputs.cache
+C:\Users\Eduardo\source\repos\MeusProgramasDesktop\ChangeName\ChangeName\bin\Debug\ChangeName.exe.config
+C:\Users\Eduardo\source\repos\MeusProgramasDesktop\ChangeName\ChangeName\bin\Debug\ChangeName.exe
+C:\Users\Eduardo\source\repos\MeusProgramasDesktop\ChangeName\ChangeName\bin\Debug\ChangeName.pdb
+C:\Users\Eduardo\source\repos\MeusProgramasDesktop\ChangeName\ChangeName\obj\Debug\ChangeName.exe
+C:\Users\Eduardo\source\repos\MeusProgramasDesktop\ChangeName\ChangeName\obj\Debug\ChangeName.pdb
