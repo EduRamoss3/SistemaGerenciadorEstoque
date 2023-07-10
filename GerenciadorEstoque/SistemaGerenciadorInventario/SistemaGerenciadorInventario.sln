@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaGerenciadorInventario", "SistemaGerenciadorInventario\SistemaGerenciadorInventario.csproj", "{CAD857DB-1984-469E-B6C8-9554AED302B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAD857DB-1984-469E-B6C8-9554AED302B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD857DB-1984-469E-B6C8-9554AED302B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD857DB-1984-469E-B6C8-9554AED302B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD857DB-1984-469E-B6C8-9554AED302B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09237BC2-792E-492F-8643-0CADB79A7E88}
+	EndGlobalSection
+EndGlobal
