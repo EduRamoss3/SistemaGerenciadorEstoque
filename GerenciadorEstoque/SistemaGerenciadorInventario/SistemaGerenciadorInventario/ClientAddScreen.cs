@@ -18,6 +18,7 @@ namespace SistemaGerenciadorInventario
     {
         ClientAcess acess = new ClientAcess();
         private OnlyClient onlyclient;
+        private MainScreen mainScreen;
         public ClientAddScreen()
         {
             InitializeComponent();
@@ -26,6 +27,12 @@ namespace SistemaGerenciadorInventario
         {
             InitializeComponent();
             this.onlyclient = onlyClient;
+            
+        }
+        public ClientAddScreen(MainScreen mainScreen)
+        {
+            InitializeComponent();
+            this.mainScreen = mainScreen;
         }
         private void register_Click(object sender, EventArgs e)
         {
@@ -82,9 +89,15 @@ namespace SistemaGerenciadorInventario
                     bool resultClient = acess.InsertClient(client);
                     if (resultClient)
                     {
-                        MainScreen mainScreen = new MainScreen();
-                        mainScreen.UpdateTable();
-                        onlyclient.UpdateTable();
+                        if(onlyclient != null)
+                        {
+                            onlyclient.UpdateTable();
+                        }
+                        if (mainScreen != null)
+                        {
+                            mainScreen.UpdateTable();
+                        }
+
                         this.Close();
                     }
                     else

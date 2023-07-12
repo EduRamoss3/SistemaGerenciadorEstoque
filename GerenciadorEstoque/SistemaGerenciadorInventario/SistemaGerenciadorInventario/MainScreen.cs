@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlTypes;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,13 +18,14 @@ namespace SistemaGerenciadorInventario
     {
         private BindingSource bindingSource;
         ClientAcess clientAcess = new ClientAcess();
+        BuyAcess buyAcess = new BuyAcess();
         public MainScreen()
         {
 
             InitializeComponent();
             UpdateTable();
-            valorTotal.Visible = false;
-            labelValue.Visible = false;
+            lblTotal.Visible = false;
+            lblValue.Visible = false;
             dataGridClientes.Columns["QntBuyItems"].Visible = true;
             dataGridClientes.Columns["DownSale"].Visible = false;
             dataGridClientes.Columns["Id"].HeaderText = "ID (Identificador)";
@@ -58,7 +61,7 @@ namespace SistemaGerenciadorInventario
         private void btnAdcClient_Click(object sender, EventArgs e)
         {
             
-            ClientAddScreen screen = new ClientAddScreen();
+            ClientAddScreen screen = new ClientAddScreen(this);
             screen.Show();
 
             
@@ -134,6 +137,21 @@ namespace SistemaGerenciadorInventario
         {
             ResumeScreen resumeScreen = new ResumeScreen();
             resumeScreen.Show();
+        }
+
+        private void btnTotalReceiv_Click(object sender, EventArgs e)
+        {
+            lblTotal.Visible = true;
+            lblValue.Visible = true;
+            SqlMoney totalMoney = buyAcess.TotalMoney();
+            lblValue.Text = totalMoney.ToString();
+
+        }
+
+        private void btnFatur_Click(object sender, EventArgs e)
+        {
+            FatureScreen fature = new FatureScreen();
+            fature.Show();
         }
     }
         

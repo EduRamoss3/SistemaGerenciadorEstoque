@@ -40,6 +40,8 @@ namespace SistemaGerenciadorInventario
             {
                 lblSaldo.ForeColor = Color.Red;
             }
+            lblEnter.Visible = false;
+            numericUpPayed.Visible = false;
 
         }
         public SqlMoney[] cmbValues()
@@ -70,10 +72,23 @@ namespace SistemaGerenciadorInventario
                 if (radioParcel.Checked)
                 {
                     comboValues.Visible = true;
+                    lblEnter.Visible = true;
+                    numericUpPayed.Visible = true;
+                    lblRemaing.Visible = true; ;
+                    lblTxtRmn.Visible = true;
+                    lblEnter.Visible = true;
+                    numericUpPayed.Visible = true;
+
                 }
                 else
                 {
                     comboValues.Visible = false;
+                    lblEnter.Visible = false;
+                    numericUpPayed.Visible = false;
+                    lblRemaing.Visible = false; ;
+                    lblTxtRmn.Visible = false;
+                    lblEnter.Visible = false;
+                    numericUpPayed.Visible = false;
                 }
                 lblDate.Visible = true;
                 dateTimePicker1.Visible = true;
@@ -214,8 +229,9 @@ namespace SistemaGerenciadorInventario
             {
                 if (radioAvist.Checked)
                 {
+                   
                     bool trySale = buyAcess.TryNewSale(item, Convert.ToInt32(numericQnt.Value)); // Verificando se tem o item no estoque
-                    if (trySale)
+                    if (trySale && numericQnt.Value > 0)
                     {
                         //se tem o item no estoque, irá realizar a compra
                         bool result = buyAcess.NewSale(client, item, Convert.ToInt32(numericQnt.Value), DateTime.Now, item.Price);
@@ -234,11 +250,13 @@ namespace SistemaGerenciadorInventario
                     }
                     else
                     {
-                        MessageBox.Show("Estoque insuficiente.");
+                        MessageBox.Show("Quantidade inadequada.");
                     }
                 }
                 if (radioParcel.Checked)
                 {
+                    
+
                     string comboSelect = comboValues.Text;
                     int positionSelected = 0;
                     for (int i = 1; i < 7; i++)
@@ -281,6 +299,12 @@ namespace SistemaGerenciadorInventario
                     }
                     else
                     {
+                        lblEnter.Visible = false;
+                        numericUpPayed.Visible = false;
+                        lblRemaing.Visible = false;
+                        lblTxtRmn.Visible = false;
+                        lblEnter.Visible = false;
+                        numericUpPayed.Visible = false;
                         MessageBox.Show("Estoque insuficiente.");
                     }
                 }

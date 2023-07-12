@@ -174,6 +174,9 @@
   <data name="btnItens.Text" xml:space="preserve">
     <value>Estoque</value>
   </data>
+  <data name="lblTotal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>717, 25</value>
+  </data>
   <data name="btnTotalReceiv.Location" type="System.Drawing.Point, System.Drawing">
     <value>508, 629</value>
   </data>
@@ -186,8 +189,11 @@
   <data name="btnItens.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 63</value>
   </data>
-  <data name="btnSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 23</value>
+  <data name="&gt;&gt;lblTotal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblValue.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;btnTotalReceiv.Parent" xml:space="preserve">
     <value>$this</value>
@@ -213,6 +219,9 @@
   <data name="btnAdcClient.Location" type="System.Drawing.Point, System.Drawing">
     <value>1195, 19</value>
   </data>
+  <data name="&gt;&gt;btnSearch.Name" xml:space="preserve">
+    <value>btnSearch</value>
+  </data>
   <data name="&gt;&gt;labelValue.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -221,6 +230,9 @@
   </data>
   <data name="&gt;&gt;btnCompra.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnTotalReceiv.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -312,8 +324,8 @@
   <data name="btnItens.Location" type="System.Drawing.Point, System.Drawing">
     <value>1153, 629</value>
   </data>
-  <data name="textSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 22</value>
+  <data name="&gt;&gt;valorTotal.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;dataGridClientes.ZOrder" xml:space="preserve">
     <value>11</value>
@@ -324,11 +336,20 @@
   <data name="&gt;&gt;btnTotalReceiv.Name" xml:space="preserve">
     <value>btnTotalReceiv</value>
   </data>
+  <data name="&gt;&gt;lblTotal.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>771, 25</value>
+  </data>
   <data name="btnFatur.Location" type="System.Drawing.Point, System.Drawing">
     <value>847, 629</value>
   </data>
-  <data name="&gt;&gt;dataGridClientes.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="lblValue.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;lblValue.Name" xml:space="preserve">
+    <value>lblValue</value>
   </data>
   <data name="&gt;&gt;valorTotal.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -339,8 +360,11 @@
   <data name="&gt;&gt;textSearch.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;btnSearch.Name" xml:space="preserve">
-    <value>btnSearch</value>
+  <data name="textSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 22</value>
+  </data>
+  <data name="&gt;&gt;lblTotal.Name" xml:space="preserve">
+    <value>lblTotal</value>
   </data>
   <data name="&gt;&gt;btnResume.Parent" xml:space="preserve">
     <value>$this</value>
@@ -362,6 +386,9 @@
   </data>
   <data name="&gt;&gt;textSearch.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridClientes.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainScreen</value>
@@ -387,8 +414,8 @@
   <data name="&gt;&gt;textSearch.Name" xml:space="preserve">
     <value>textSearch</value>
   </data>
-  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblTotal.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
   <data name="labelValue.Text" xml:space="preserve">
     <value>.</value>
@@ -399,7 +426,7 @@
   <data name="labelValue.Location" type="System.Drawing.Point, System.Drawing">
     <value>771, 25</value>
   </data>
-  <data name="&gt;&gt;valorTotal.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblValue.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="btnCompra.Location" type="System.Drawing.Point, System.Drawing">
@@ -443,6 +470,15 @@
   </data>
   <data name="btnCompra.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
+  </data>
+  <data name="&gt;&gt;lblTotal.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="btnSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 23</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

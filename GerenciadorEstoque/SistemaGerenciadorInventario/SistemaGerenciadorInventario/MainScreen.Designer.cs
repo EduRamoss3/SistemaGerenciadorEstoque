@@ -39,8 +39,8 @@
             this.btnExcludeClient = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.textSearch = new System.Windows.Forms.TextBox();
-            this.valorTotal = new System.Windows.Forms.Label();
-            this.labelValue = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.lblValue = new System.Windows.Forms.Label();
             this.btnCompra = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridClientes)).BeginInit();
             this.SuspendLayout();
@@ -68,12 +68,14 @@
             resources.ApplyResources(this.btnFatur, "btnFatur");
             this.btnFatur.Name = "btnFatur";
             this.btnFatur.UseVisualStyleBackColor = true;
+            this.btnFatur.Click += new System.EventHandler(this.btnFatur_Click);
             // 
             // btnTotalReceiv
             // 
             resources.ApplyResources(this.btnTotalReceiv, "btnTotalReceiv");
             this.btnTotalReceiv.Name = "btnTotalReceiv";
             this.btnTotalReceiv.UseVisualStyleBackColor = true;
+            this.btnTotalReceiv.Click += new System.EventHandler(this.btnTotalReceiv_Click);
             // 
             // btnResume
             // 
@@ -115,19 +117,19 @@
             resources.ApplyResources(this.textSearch, "textSearch");
             this.textSearch.Name = "textSearch";
             // 
-            // valorTotal
+            // lblTotal
             // 
-            resources.ApplyResources(this.valorTotal, "valorTotal");
-            this.valorTotal.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.valorTotal.ForeColor = System.Drawing.Color.Lime;
-            this.valorTotal.Name = "valorTotal";
+            resources.ApplyResources(this.lblTotal, "lblTotal");
+            this.lblTotal.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblTotal.ForeColor = System.Drawing.Color.Lime;
+            this.lblTotal.Name = "lblTotal";
             // 
-            // labelValue
+            // lblValue
             // 
-            resources.ApplyResources(this.labelValue, "labelValue");
-            this.labelValue.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.labelValue.ForeColor = System.Drawing.Color.Lime;
-            this.labelValue.Name = "labelValue";
+            resources.ApplyResources(this.lblValue, "lblValue");
+            this.lblValue.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblValue.ForeColor = System.Drawing.Color.Lime;
+            this.lblValue.Name = "lblValue";
             // 
             // btnCompra
             // 
@@ -142,8 +144,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.Controls.Add(this.btnCompra);
-            this.Controls.Add(this.labelValue);
-            this.Controls.Add(this.valorTotal);
+            this.Controls.Add(this.lblValue);
+            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.textSearch);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnExcludeClient);
@@ -174,8 +176,8 @@
         private System.Windows.Forms.Button btnExcludeClient;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox textSearch;
-        private System.Windows.Forms.Label valorTotal;
-        private System.Windows.Forms.Label labelValue;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label lblValue;
         private System.Windows.Forms.Button btnCompra;
     }
 }

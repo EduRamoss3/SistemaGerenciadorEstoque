@@ -17,6 +17,7 @@ namespace SistemaGerenciadorInventario.Data
     internal class BuyAcess
     {
         public readonly static SqlCeConnection ceConnection = new SqlCeConnection(@"Data Source = C:\Users\Eduardo\source\repos\MeusProgramasDesktop\GerenciadorEstoque\SistemaGerenciadorInventario\SistemaGerenciadorInventario\Data\SystemData.sdf; Max Database Size=4091");
+        
         public bool TryNewSale(Item item, int quantity)
         {
             int selectQnt = SelectQntItem(item.Id);
@@ -28,6 +29,30 @@ namespace SistemaGerenciadorInventario.Data
             {
                 return true;
             }
+        }
+
+        public DataTable ViewTableFature()
+        {
+            string sql = "SELECT C.Name, C.CPF, B.* FROM Client AS C INNER JOIN BuysTable AS B ON C.CPF = B.CPF WHERE C.DownSale > 0";
+            SqlCeDataAdapter CMD = new SqlCeDataAdapter(sql, ceConnection);
+            DataSet ds = new DataSet();
+            CMD.Fill(ds);
+
+            return ds.Tables[0];
+        }
+        public SqlMoney TotalMoney()
+        {
+            SqlMoney result = 0;
+            string sql = "SELECT DownSale FROM Client WHERE Id > 0";
+            SqlCeCommand CMD = new SqlCeCommand(sql, ceConnection);
+            ceConnection.Open();
+            SqlCeDataReader response = CMD.ExecuteReader();
+            while (response.Read())
+            {
+                result += response.GetSqlMoney(0);
+            }
+            ceConnection.Close();
+            return result;
         }
         public bool NewSale(Client client, Item item, int quantity, DateTime dateInit, SqlMoney value)
         {
@@ -107,7 +132,7 @@ namespace SistemaGerenciadorInventario.Data
         {
             SqlMoney total = item.Price * quantity;
             SqlMoney parcel = item.Price / qntParcel;
-            SqlMoney remainingPay = parcel * (qntPayed - qntParcel);
+            SqlMoney remainingPay = parcel * (qntParcel - qntPayed);
             string sql = "INSERT INTO BuysTable (CPF, Value, Quantity, DateInit, Name, QntParcel, QntPayed,PayedParcel,RemainingPay) " +
                 "VALUES  (@CPF, @Value, @Quantity, @DateInit, @Name, @QntParcel, @QntPayed, @PayedParcel ,@RemainingPay)";
             SqlCeCommand CMD = new SqlCeCommand(sql, ceConnection);
@@ -148,13 +173,29 @@ namespace SistemaGerenciadorInventario.Data
             SqlMoney value = 0;
             if (response.Read())
             {
-                value = response.GetSqlMoney(0);
+                if (response == null)
+                {
+                    value = 0;
+                }
+                else
+                {
+                    value = response.GetSqlMoney(0);
+                }
+                               
                 ceConnection.Close();
             }
 
             string sql = "UPDATE Client SET DownSale = @DownSale WHERE Id = @id";
             SqlCeCommand CMD1 = new SqlCeCommand(sql, ceConnection);
-            CMD1.Parameters.AddWithValue("@DownSale", value += remainingPay);
+            if(value > 0)
+            {
+                CMD1.Parameters.AddWithValue("@DownSale", value += remainingPay);
+            }
+            else
+            {
+                CMD1.Parameters.AddWithValue("@DownSale", remainingPay);
+            }
+           
             CMD1.Parameters.AddWithValue("@id", client.Id);
             ceConnection.Open();
             if (CMD1.ExecuteNonQuery() > 0)
