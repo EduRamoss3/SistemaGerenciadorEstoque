@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using SistemaGerenciadorInventario.Data;
+using SistemaGerenciadorInventario.Entities;
+using System;
 using System.Data.SqlTypes;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using SistemaGerenciadorInventario.Data;
-using SistemaGerenciadorInventario.Entities;
 
 namespace SistemaGerenciadorInventario
 {
@@ -44,7 +38,7 @@ namespace SistemaGerenciadorInventario
             numericUpPayed.Visible = false;
 
         }
-        public SqlMoney[] cmbValues()
+        public SqlMoney[] cmbValues()                                                                           
         {
             SqlMoney[] vect = new SqlMoney[6];
             SqlMoney total = item.Price * numericQnt.Value;
@@ -56,6 +50,7 @@ namespace SistemaGerenciadorInventario
             vect[5] = total / 7;
             return vect;
         }
+
         private void radioAvist_CheckedChanged(object sender, EventArgs e)
         {
             if (radioAvist.Checked)
@@ -137,6 +132,7 @@ namespace SistemaGerenciadorInventario
             comboValues.Text = "Selecione a quantidade";
             UpdateTotal();
 
+
         }
 
         public void ChangeNumeric(object sender, EventArgs e)
@@ -171,7 +167,7 @@ namespace SistemaGerenciadorInventario
             {
                 if (item != null)
                 {
-                    numericUpPayed.Visible = true;  
+                    numericUpPayed.Visible = true;
                     string comboSelect = comboValues.Text;
                     int positionSelected = 0;
 
@@ -186,11 +182,12 @@ namespace SistemaGerenciadorInventario
                     lblRemaing.Visible = true;
                     lblTxtRmn.Visible = true;
 
+
                     if (Convert.ToInt32(numericUpPayed.Value) > positionSelected - 1)
                     {
                         MessageBox.Show("Máximo de entrada já selecionado");
                         numericUpPayed.Value = positionSelected - 1;
-                        if(numericUpPayed.Value < 0)
+                        if (numericUpPayed.Value < 0)
                         {
                             numericUpPayed.Value = 0;
                         }
@@ -215,30 +212,30 @@ namespace SistemaGerenciadorInventario
                 lblRemaing.Visible = false;
                 lblTxtRmn.Visible = false;
             }
-
-
-
         }
-    
+
         private void btnOk_Click(object sender, EventArgs e)
         {
             ResumeScreen resumeScreen = new ResumeScreen(this);
             OnlyProduct onlyProduct = new OnlyProduct(this);
             ItemScreen itemScreen = new ItemScreen(this);
+
             if (client != null && item != null)
             {
+                progressBar1.Value = 20;
+                Buy buy = new Buy(client, item, Convert.ToInt32(numericQnt.Value), DateTime.Now, item.Price);
                 if (radioAvist.Checked)
                 {
-                   
+                    progressBar1.Value = 45;
                     bool trySale = buyAcess.TryNewSale(item, Convert.ToInt32(numericQnt.Value)); // Verificando se tem o item no estoque
                     if (trySale && numericQnt.Value > 0)
                     {
                         //se tem o item no estoque, irá realizar a compra
-                        bool result = buyAcess.NewSale(client, item, Convert.ToInt32(numericQnt.Value), DateTime.Now, item.Price);
+                        bool result = buyAcess.NewSale(buy, Convert.ToInt32(numericQnt.Value));
                         if (result)
                         {
                             //Realizando a compra, irá atualizar os dados e cadastrar na tabela de compras
-
+                            progressBar1.Value = 100;
                             onlyProduct.UpdateTable();
                             itemScreen.UpdateTable();
                             itemScreen.UpdateTotal();
@@ -255,7 +252,7 @@ namespace SistemaGerenciadorInventario
                 }
                 if (radioParcel.Checked)
                 {
-                    
+
 
                     string comboSelect = comboValues.Text;
                     int positionSelected = 0;
@@ -272,9 +269,11 @@ namespace SistemaGerenciadorInventario
                     {
                         if (positionSelected == Convert.ToInt32(numericUpPayed.Value))
                         {
-                            bool resultParcelPay = buyAcess.NewSaleParceledPay(client, item, Convert.ToInt32(numericQnt.Value), dateTimePicker1.Value, Convert.ToInt32(numericUpPayed.Value), positionSelected, true);
+                            Buy buyParceledPay = new Buy(client, item, Convert.ToInt32(numericQnt.Value), dateTimePicker1.Value, Convert.ToInt32(numericUpPayed.Value), positionSelected, true);
+                            bool resultParcelPay = buyAcess.NewSaleParceledPay(buyParceledPay, Convert.ToInt32(numericQnt.Value));
                             if (resultParcelPay)
                             {
+                                progressBar1.Value = 100;
                                 onlyProduct.UpdateTable();
                                 itemScreen.UpdateTable();
                                 itemScreen.UpdateTotal();
@@ -285,9 +284,11 @@ namespace SistemaGerenciadorInventario
                             }
 
                         }
-                        bool resultParcel = buyAcess.NewSaleParceled(client, item, Convert.ToInt32(numericQnt.Value), dateTimePicker1.Value, Convert.ToInt32(numericUpPayed.Value), positionSelected);
+                        Buy buyParcel = new Buy(client, item, Convert.ToInt32(numericQnt.Value), dateTimePicker1.Value, Convert.ToInt32(numericUpPayed.Value), positionSelected, false);
+                        bool resultParcel = buyAcess.NewSaleParceled(buyParcel, Convert.ToInt32(numericQnt.Value));
                         if (resultParcel)
                         {
+                            progressBar1.Value = 100;
                             onlyProduct.UpdateTable();
                             itemScreen.UpdateTable();
                             itemScreen.UpdateTotal();
@@ -318,6 +319,7 @@ namespace SistemaGerenciadorInventario
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+            progressBar1.Value = 0;
         }
     }
 }

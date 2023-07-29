@@ -1,19 +1,11 @@
 ﻿using SistemaGerenciadorInventario.Data;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlTypes;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaGerenciadorInventario
 {
-    
+
     public partial class MainScreen : Form
     {
         private BindingSource bindingSource;
@@ -60,11 +52,11 @@ namespace SistemaGerenciadorInventario
 
         private void btnAdcClient_Click(object sender, EventArgs e)
         {
-            
+
             ClientAddScreen screen = new ClientAddScreen(this);
             screen.Show();
 
-            
+
         }
 
         private void btnExcludeClient_Click(object sender, EventArgs e)
@@ -72,7 +64,7 @@ namespace SistemaGerenciadorInventario
             try
             {
                 int id = Convert.ToInt32(dataGridClientes.SelectedRows[0].Cells[0].Value);
-                if(id == 0)
+                if (id == 0)
                 {
                     MessageBox.Show("Nenhum cliente foi selecionado.");
                 }
@@ -93,7 +85,7 @@ namespace SistemaGerenciadorInventario
             {
                 MessageBox.Show("Selecione um cliente válido");
             }
-          
+
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -120,7 +112,7 @@ namespace SistemaGerenciadorInventario
 
         private void btnEditClient_Click(object sender, EventArgs e)
         {
-            
+
             int id = Convert.ToInt32(dataGridClientes.SelectedRows[0].Cells[0].Value);
             EditClient editClient = new EditClient(this, id);
             editClient.Show();
@@ -144,7 +136,15 @@ namespace SistemaGerenciadorInventario
             lblTotal.Visible = true;
             lblValue.Visible = true;
             SqlMoney totalMoney = buyAcess.TotalMoney();
-            lblValue.Text = totalMoney.ToString();
+            if(totalMoney != 0 || totalMoney.ToString() != "Null")
+            {
+                lblValue.Text = totalMoney.ToString();
+            }
+            else
+            {
+                lblValue.Text = 0.ToString();
+            }
+            
 
         }
 
@@ -154,6 +154,6 @@ namespace SistemaGerenciadorInventario
             fature.Show();
         }
     }
-        
-    
+
+
 }

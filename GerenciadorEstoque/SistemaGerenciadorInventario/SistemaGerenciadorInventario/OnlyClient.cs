@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SistemaGerenciadorInventario.Data;
+using System;
 using System.Windows.Forms;
-using SistemaGerenciadorInventario.Data;
 
 namespace SistemaGerenciadorInventario
 {
@@ -48,13 +41,13 @@ namespace SistemaGerenciadorInventario
         private void btnNew_Click(object sender, EventArgs e)
         {
             ClientAddScreen clientAddScreen = new ClientAddScreen(this);
-            clientAddScreen.Show(); 
+            clientAddScreen.Show();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dataGridClient.SelectedRows[0].Cells[0].Value);
-            newbuy.receiveIdClient = id;    
+            newbuy.receiveIdClient = id;
             newbuy.ClientToScreen();
             this.Close();
         }

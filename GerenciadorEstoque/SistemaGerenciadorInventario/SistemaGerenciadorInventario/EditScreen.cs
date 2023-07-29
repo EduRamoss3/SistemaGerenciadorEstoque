@@ -1,22 +1,12 @@
 ﻿using SistemaGerenciadorInventario.Data;
+using SistemaGerenciadorInventario.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using SistemaGerenciadorInventario.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using SistemaGerenciadorInventario.Entities.Enum;
-using Type = SistemaGerenciadorInventario.Entities.Enum.Type;
-using static System.Windows.Forms.LinkLabel;
-using System.Globalization;
-using System.Data.SqlTypes;
 using System.ComponentModel.DataAnnotations;
-using System.Data.SqlClient;
+using System.Data.SqlTypes;
+using System.Text;
+using System.Windows.Forms;
+using Type = SistemaGerenciadorInventario.Entities.Enum.Type;
 
 namespace SistemaGerenciadorInventario
 {
@@ -84,7 +74,7 @@ namespace SistemaGerenciadorInventario
                         if (receiveValidation)
                         {
                             itemScreen.UpdateTable();
-                            this.Close();   
+                            this.Close();
                         }
                         else
                         {
@@ -122,7 +112,7 @@ namespace SistemaGerenciadorInventario
             {
                 MessageBox.Show("Verifique se os dados não estão vazios");
             }
-          
+
 
 
 

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlServerCe;
-using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SistemaGerenciadorInventario.Data
 {
@@ -31,7 +26,7 @@ namespace SistemaGerenciadorInventario.Data
                     client.QntBuyItems = response.GetInt32(5);
 
                 if (!response.IsDBNull(6))
-                client.DownSale = response.GetSqlMoney(6);
+                    client.DownSale = response.GetSqlMoney(6);
                 client.Email = response.GetString(7);
                 client.Sex = response.GetString(8);
                 client.Phone = response.GetString(9);
@@ -126,6 +121,7 @@ namespace SistemaGerenciadorInventario.Data
             CMD.Parameters.AddWithValue("@Rua", client.Rua);
             CMD.Parameters.AddWithValue("@Num", client.Num.ToString());
             CMD.Parameters.AddWithValue("@State", client.State);
+            
             ceConnection.Open();
             if (CMD.ExecuteNonQuery() >= 0)
             {

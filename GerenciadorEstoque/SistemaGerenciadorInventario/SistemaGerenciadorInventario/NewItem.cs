@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Data.SqlTypes;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using SistemaGerenciadorInventario.Data;
+﻿using SistemaGerenciadorInventario.Data;
 using SistemaGerenciadorInventario.Entities;
-using SistemaGerenciadorInventario.Entities.Enum;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.SqlTypes;
+using System.Text;
+using System.Windows.Forms;
 using Type = SistemaGerenciadorInventario.Entities.Enum.Type;
 
 namespace SistemaGerenciadorInventario
 {
-   
+
     public partial class NewItem : Form
     {
         InventoryAcess inventoryAcess = new InventoryAcess();
         private ItemScreen itemScreen;
-        private OnlyProduct onlyProduct;    
-        
-        public NewItem(OnlyProduct onlyProduct , ItemScreen itemScreen)
+        private OnlyProduct onlyProduct;
+
+        public NewItem(OnlyProduct onlyProduct, ItemScreen itemScreen)
         {
             InitializeComponent();
             this.onlyProduct = onlyProduct;
@@ -52,7 +46,7 @@ namespace SistemaGerenciadorInventario
             comboBox1.Items.Add("Virtual");
             dateTimePicker1.Value = DateTime.Now;
             lblErrors.Visible = true;
-            this.itemScreen = itemScreen;   
+            this.itemScreen = itemScreen;
         }
 
         private void btnReady_Click(object sender, EventArgs e)
@@ -62,7 +56,7 @@ namespace SistemaGerenciadorInventario
                 //Passando os dados da tela 'New Item'  para a classe item
                 Item item = new Item();
                 item.Name = boxName.Text;
-                if(item.Name.Length < 5)
+                if (item.Name.Length < 5)
                 {
                     MessageBox.Show("Nome precisa ter mais do que 5 caracteres");
                 }
@@ -84,9 +78,13 @@ namespace SistemaGerenciadorInventario
                     if (result)
                     {
                         itemScreen.UpdateTable();
-                        onlyProduct.UpdateTable();
-                        NewBuy newBuy = new NewBuy();   
-                      
+                        if(onlyProduct != null)
+                        {
+                            onlyProduct.UpdateTable();
+                        }
+                        
+                        NewBuy newBuy = new NewBuy();
+
                         this.Close();
 
                     }
@@ -116,13 +114,13 @@ namespace SistemaGerenciadorInventario
             {
                 MessageBox.Show("Verifique se os dados não estão vazios");
             }
-           
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
-            
+
         }
     }
 }

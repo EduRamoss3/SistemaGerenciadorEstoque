@@ -1,16 +1,10 @@
-﻿using System;
+﻿using SistemaGerenciadorInventario.Data;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using SistemaGerenciadorInventario.Data;
-using SistemaGerenciadorInventario.Entities;
 
 namespace SistemaGerenciadorInventario
 {
@@ -27,7 +21,7 @@ namespace SistemaGerenciadorInventario
         {
             InitializeComponent();
             this.onlyclient = onlyClient;
-            
+
         }
         public ClientAddScreen(MainScreen mainScreen)
         {
@@ -89,7 +83,7 @@ namespace SistemaGerenciadorInventario
                     bool resultClient = acess.InsertClient(client);
                     if (resultClient)
                     {
-                        if(onlyclient != null)
+                        if (onlyclient != null)
                         {
                             onlyclient.UpdateTable();
                         }

@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.ComponentModel;
+﻿using SistemaGerenciadorInventario.Entities;
+using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Data.SqlServerCe;
 using System.Data.SqlTypes;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using SistemaGerenciadorInventario.Entities;
-using SistemaGerenciadorInventario.Entities.Enum;
 using Type = SistemaGerenciadorInventario.Entities.Enum.Type;
 
 namespace SistemaGerenciadorInventario.Data
@@ -29,7 +16,7 @@ namespace SistemaGerenciadorInventario.Data
             string sql = "SELECT * FROM ItemTable WHERE Id = @id";
             SqlCeCommand CMD = new SqlCeCommand(sql, ceConnection);
             CMD.Parameters.AddWithValue("@id", id);
-            ceConnection.Open();  
+            ceConnection.Open();
             SqlCeDataReader response = CMD.ExecuteReader();
             Item item = new Item();
             if (response.Read())
@@ -47,7 +34,7 @@ namespace SistemaGerenciadorInventario.Data
             ceConnection.Close();
             return item;
         }
-     
+
         public SqlMoney SelectOneItem(int id)
         {
             SqlMoney total = 0;
@@ -56,7 +43,7 @@ namespace SistemaGerenciadorInventario.Data
             CMD.Parameters.AddWithValue("@id", id);
             ceConnection.Open();
             SqlCeDataReader response = CMD.ExecuteReader();
-            
+
             while (response.Read())
             {
                 Item item = new Item();
@@ -125,7 +112,7 @@ namespace SistemaGerenciadorInventario.Data
             {
                 item.Id = response.GetInt32(0);
                 item.Quantity = response.GetInt32(3);
-            
+
             }
             ceConnection.Close();
             return item.Quantity;
@@ -138,10 +125,10 @@ namespace SistemaGerenciadorInventario.Data
             string sql = "UPDATE ItemTable SET Quantity = @Quantity WHERE Id = @id";
             SqlCeCommand CMD = new SqlCeCommand(sql, ceConnection);
             CMD.Parameters.AddWithValue("@id", id);
-            CMD.Parameters.AddWithValue("@Quantity", quantity+1);
+            CMD.Parameters.AddWithValue("@Quantity", quantity + 1);
             ceConnection.Open();
             CMD.ExecuteNonQuery();
-            if(CMD.ExecuteNonQuery() > 0)
+            if (CMD.ExecuteNonQuery() > 0)
             {
                 ceConnection.Close();
                 return true;
@@ -165,7 +152,7 @@ namespace SistemaGerenciadorInventario.Data
         {
             Item item = new Item();
             string sql = "SELECT * FROM ItemTable WHERE Id = @id";
-            SqlCeCommand CMD = new SqlCeCommand(sql,ceConnection);
+            SqlCeCommand CMD = new SqlCeCommand(sql, ceConnection);
             CMD.Parameters.AddWithValue("@id", id);
             ceConnection.Open();
             SqlCeDataReader response = CMD.ExecuteReader();
@@ -175,7 +162,8 @@ namespace SistemaGerenciadorInventario.Data
                 item.Name = response.GetString(1);
                 item.Price = response.GetSqlMoney(2);
                 item.Quantity = response.GetInt32(3);
-                try {
+                try
+                {
 
                     string Typez = response.GetString(4);
                     Type o;
@@ -185,8 +173,8 @@ namespace SistemaGerenciadorInventario.Data
                 catch (System.Data.SqlTypes.SqlNullValueException)
                 {
                     MessageBox.Show("Valor nulo");
-                }          
-                item.DataEnter = response.GetDateTime(5);   
+                }
+                item.DataEnter = response.GetDateTime(5);
             }
             ceConnection.Close();
             return item;
@@ -216,20 +204,20 @@ namespace SistemaGerenciadorInventario.Data
             CMD.Parameters.AddWithValue("@id", id);
             ceConnection.Open();
             CMD.ExecuteNonQuery();
-            if(CMD.ExecuteNonQuery() == 0 && CMD.ExecuteNonQuery() > 0)
+            if (CMD.ExecuteNonQuery() == 0 && CMD.ExecuteNonQuery() > 0)
             {
                 ceConnection.Close();
                 return true;
-                
+
             }
             else
             {
                 ceConnection.Close();
                 return false;
             }
-            
+
         }
-        public bool UpdateItem(Item item , int id)
+        public bool UpdateItem(Item item, int id)
         {
             ceConnection.Close();
             string sql = "UPDATE ItemTable SET Name = @Name, Price = @Price, Quantity = @Quantity, Type = @Type WHERE Id = @id";
@@ -241,7 +229,7 @@ namespace SistemaGerenciadorInventario.Data
             CMD.Parameters.AddWithValue("@Type", item.type);
             ceConnection.Open();
             CMD.ExecuteNonQuery();
-            if(CMD.ExecuteNonQuery() >= 0)
+            if (CMD.ExecuteNonQuery() >= 0)
             {
                 ceConnection.Close();
                 return true;
@@ -251,7 +239,7 @@ namespace SistemaGerenciadorInventario.Data
                 ceConnection.Close();
                 return false;
             }
-       }
+        }
 
     }
 }

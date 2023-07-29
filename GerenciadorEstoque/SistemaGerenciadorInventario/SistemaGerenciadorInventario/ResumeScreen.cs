@@ -1,12 +1,5 @@
 ﻿using SistemaGerenciadorInventario.Data;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaGerenciadorInventario
@@ -16,6 +9,7 @@ namespace SistemaGerenciadorInventario
         BuyAcess buyAcess = new BuyAcess();
         private NewBuy newBuy;
         private BindingSource bindingSource;
+
         public ResumeScreen(NewBuy newBuy)
         {
             InitializeComponent();
@@ -46,9 +40,8 @@ namespace SistemaGerenciadorInventario
             dataGridResume.Columns["QntParcel"].HeaderText = "Qnt. Parcelas";
             dataGridResume.Columns["QntPayed"].HeaderText = "Qnt. Parcelas pagas";
             dataGridResume.Columns["RemainingPay"].HeaderText = "Falta pagar";
-
+            
         }
-
         public void UpdateTable()
         {
             dataGridResume.DataSource = buyAcess.ViewTable();
@@ -84,8 +77,18 @@ namespace SistemaGerenciadorInventario
 
         private void lblPayed_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridResume.SelectedRows[0].Cells[0].Value);
-           // bool editPayment = buyAcess.EditPay(id);
+            try
+            {
+                int id = Convert.ToInt32(dataGridResume.SelectedRows[0].Cells[0].Value);
+                PayingScreen payingScreen = new PayingScreen(id, this);
+                payingScreen.Show();
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Selecione um cliente válido.");
+            }
+            
+            
         }
     }
 }

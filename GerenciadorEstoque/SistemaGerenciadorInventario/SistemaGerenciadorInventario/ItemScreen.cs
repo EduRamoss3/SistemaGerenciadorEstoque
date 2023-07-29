@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using SistemaGerenciadorInventario.Entities;
-using SistemaGerenciadorInventario.Data;
-using System.Data.Common;
+﻿using SistemaGerenciadorInventario.Data;
+using System;
 using System.Data.SqlTypes;
+using System.Windows.Forms;
 
 namespace SistemaGerenciadorInventario
 {
@@ -160,7 +151,7 @@ namespace SistemaGerenciadorInventario
             if (Result > 0)
             {
                 UpdateTable();
-                lblTotal.Text = " R$" +Result.ToString();
+                lblTotal.Text = " R$" + Result.ToString();
                 label1.Text = "Valor total do item ID " + id;
             }
             else
@@ -177,5 +168,5 @@ namespace SistemaGerenciadorInventario
         }
 
     }
-       
+
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SistemaGerenciadorInventario.Entities.Enum
+﻿namespace SistemaGerenciadorInventario.Entities.Enum
 {
     internal enum Type : int
     {

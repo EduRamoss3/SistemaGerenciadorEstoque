@@ -1,12 +1,5 @@
 ﻿using SistemaGerenciadorInventario.Data;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaGerenciadorInventario
@@ -37,7 +30,7 @@ namespace SistemaGerenciadorInventario
         private void btnNew_Click(object sender, EventArgs e)
         {
             ItemScreen itemScreen = new ItemScreen();
-            NewItem newItem = new NewItem(this , itemScreen);
+            NewItem newItem = new NewItem(this, itemScreen);
             newItem.Show();
             UpdateTable();
         }

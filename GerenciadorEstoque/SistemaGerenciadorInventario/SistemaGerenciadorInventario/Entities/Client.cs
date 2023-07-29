@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using Npgsql.Internal.TypeHandlers.NumericHandlers;
 using System.Data.SqlTypes;
-using System.Xml.Linq;
 
 namespace SistemaGerenciadorInventario.Data
 {
@@ -17,13 +11,13 @@ namespace SistemaGerenciadorInventario.Data
         [MinLength(5)]
         public string Name { get; set; }
         [Required]
-        public DateTime BirthDay { get; set; }  
+        public DateTime BirthDay { get; set; }
         public DateTime DateTimeEnter { get; set; }
         [StringLength(11)]
         [Required]
         public string CPF { get; set; }
         public int QntBuyItems { get; set; }
-        public SqlMoney DownSale{ get; set; }
+        public SqlMoney DownSale { get; set; }
         [Required]
         [StringLength(50)]
         public string Email { get; set; }
@@ -38,17 +32,17 @@ namespace SistemaGerenciadorInventario.Data
         [Required]
         public string Rua { get; set; }
         [Required]
-        [Range(1,9999, ErrorMessage = "O numero máximo é de 9999")]
+        [Range(1, 9999, ErrorMessage = "O numero máximo é de 9999")]
         public int Num { get; set; }
         [Required]
         [StringLength(10)]
-        public string State { get; set; }   
+        public string State { get; set; }
 
         public Client()
         {
 
         }
-        public Client(int id,string name, DateTime birthDay, string cpf, int qntBuyItems, string email, string sex, string phone, string city, string rua, int num, string state)
+        public Client(int id, string name, DateTime birthDay, string cpf, int qntBuyItems, string email, string sex, string phone, string city, string rua, int num, string state)
         {
             Id = id;
             Name = name;
@@ -62,11 +56,11 @@ namespace SistemaGerenciadorInventario.Data
             Rua = rua;
             Num = num;
             State = state;
-           
+
         }
-        public Client(string name, DateTime birthDay, DateTime dataEnter, string cpf, string email, string sex , string phone, string city, string rua, int num, string state)
+        public Client(string name, DateTime birthDay, DateTime dataEnter, string cpf, string email, string sex, string phone, string city, string rua, int num, string state)
         {
-            
+
             Name = name;
             BirthDay = birthDay;
             DateTimeEnter = dataEnter;
@@ -89,8 +83,8 @@ namespace SistemaGerenciadorInventario.Data
             Num = num;
             State = state;
         }
-    
-        public Client(int id, string name, DateTime birthDay, DateTime dateTimeEnter, string cPF, int qntBuyItems ,SqlMoney saldoDevedor)
+
+        public Client(int id, string name, DateTime birthDay, DateTime dateTimeEnter, string cPF, int qntBuyItems, SqlMoney saldoDevedor)
         {
             Id = id;
             Name = name;
@@ -99,6 +93,6 @@ namespace SistemaGerenciadorInventario.Data
             CPF = cPF;
             QntBuyItems = qntBuyItems;
             DownSale = saldoDevedor;
-        }   
+        }
     }
 }

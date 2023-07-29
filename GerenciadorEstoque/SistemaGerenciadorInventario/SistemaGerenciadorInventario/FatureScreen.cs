@@ -1,12 +1,5 @@
 ﻿using SistemaGerenciadorInventario.Data;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SistemaGerenciadorInventario
@@ -25,13 +18,14 @@ namespace SistemaGerenciadorInventario
             dataGridFature.Columns["Value"].HeaderText = "Valor";
             dataGridFature.Columns["Payed"].HeaderText = "Pago";
             dataGridFature.Columns["Name1"].HeaderText = "Produto";
-            dataGridFature.Columns["PayedParcel"].HeaderText = "Parcelas Pagas";
+            dataGridFature.Columns["PayedParcel"].Visible = false;
             dataGridFature.Columns["QntPayed"].HeaderText = "Qnt. Parcelas pagas";
-            dataGridFature.Columns["RemainingPay"].HeaderText = "Restante a ser pago";
+            dataGridFature.Columns["RemainingPay"].Visible = false;
             dataGridFature.Columns["DateInit"].HeaderText = "Data da compra";
             dataGridFature.Columns["Quantity"].HeaderText = "Qnt. Produtos";
             dataGridFature.Columns["QntParcel"].HeaderText = "Qnt. Parcelas";
         }
+       
         public void UpdateTable()
         {
             dataGridFature.DataSource = buyAcess.ViewTableFature();
