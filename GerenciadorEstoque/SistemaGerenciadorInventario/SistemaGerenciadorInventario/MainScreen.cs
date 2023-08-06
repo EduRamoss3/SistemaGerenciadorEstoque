@@ -153,6 +153,13 @@ namespace SistemaGerenciadorInventario
             FatureScreen fature = new FatureScreen();
             fature.Show();
         }
+
+        private void btnAtt_Click(object sender, EventArgs e)
+        {
+            UpdateTable();  
+        }
+
+       
     }
 
 

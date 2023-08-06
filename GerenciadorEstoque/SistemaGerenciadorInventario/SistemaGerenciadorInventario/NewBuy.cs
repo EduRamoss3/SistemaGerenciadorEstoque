@@ -219,6 +219,8 @@ namespace SistemaGerenciadorInventario
             ResumeScreen resumeScreen = new ResumeScreen(this);
             OnlyProduct onlyProduct = new OnlyProduct(this);
             ItemScreen itemScreen = new ItemScreen(this);
+            SqlMoney remainingPay = (numericQnt.Value * item.Price) - numericUpPayed.Value * item.Price; //REMAINING PAY
+
 
             if (client != null && item != null)
             {
@@ -231,6 +233,7 @@ namespace SistemaGerenciadorInventario
                     if (trySale && numericQnt.Value > 0)
                     {
                         //se tem o item no estoque, irá realizar a compra
+                        
                         bool result = buyAcess.NewSale(buy, Convert.ToInt32(numericQnt.Value));
                         if (result)
                         {
@@ -264,12 +267,13 @@ namespace SistemaGerenciadorInventario
                             positionSelected = i + 1;
                         }
                     }
+                    SqlMoney valueParcel = (Convert.ToInt32(numericQnt.Value) * item.Price) / positionSelected;
                     bool tryParcel = buyAcess.TryNewSale(item, Convert.ToInt32(numericQnt.Value)); // Verificando se tem o item no estoque
                     if (tryParcel)
                     {
                         if (positionSelected == Convert.ToInt32(numericUpPayed.Value))
                         {
-                            Buy buyParceledPay = new Buy(client, item, Convert.ToInt32(numericQnt.Value), dateTimePicker1.Value, Convert.ToInt32(numericUpPayed.Value), positionSelected, true);
+                            Buy buyParceledPay = new Buy(client, item, Convert.ToInt32(numericQnt.Value), dateTimePicker1.Value, Convert.ToInt32(numericUpPayed.Value), positionSelected, true, remainingPay, valueParcel);
                             bool resultParcelPay = buyAcess.NewSaleParceledPay(buyParceledPay, Convert.ToInt32(numericQnt.Value));
                             if (resultParcelPay)
                             {
@@ -284,7 +288,8 @@ namespace SistemaGerenciadorInventario
                             }
 
                         }
-                        Buy buyParcel = new Buy(client, item, Convert.ToInt32(numericQnt.Value), dateTimePicker1.Value, Convert.ToInt32(numericUpPayed.Value), positionSelected, false);
+                        
+                        Buy buyParcel = new Buy(client, item, Convert.ToInt32(numericQnt.Value), dateTimePicker1.Value, Convert.ToInt32(numericUpPayed.Value), positionSelected, false, remainingPay, valueParcel);
                         bool resultParcel = buyAcess.NewSaleParceled(buyParcel, Convert.ToInt32(numericQnt.Value));
                         if (resultParcel)
                         {

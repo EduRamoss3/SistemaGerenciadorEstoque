@@ -196,6 +196,9 @@
     <EmbeddedResource Include="ItemScreen.resx">
       <DependentUpon>ItemScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainScreen.en.resx">
+      <DependentUpon>MainScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainScreen.pt-BR.resx">
       <DependentUpon>MainScreen.cs</DependentUpon>
     </EmbeddedResource>

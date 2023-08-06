@@ -92,7 +92,7 @@ namespace SistemaGerenciadorInventario.Data
 
         public DataTable ViewTableFature()
         {
-            string sql = "SELECT C.Name, C.CPF, B.* FROM Client AS C INNER JOIN BuysTable AS B ON C.CPF = B.CPF WHERE C.DownSale > 0";
+            string sql = "SELECT C.Name, C.CPF, B.* FROM Client AS C INNER JOIN BuysTable AS B ON C.CPF = B.CPF WHERE B.QntPayed != B.QntParcel";
             SqlCeDataAdapter CMD = new SqlCeDataAdapter(sql, ceConnection);
             DataSet ds = new DataSet();
             CMD.Fill(ds);
@@ -115,7 +115,7 @@ namespace SistemaGerenciadorInventario.Data
         }
         public bool UpdateBuy(Buy buy)
         {
-         
+
             string sql = "UPDATE BuysTable SET Value = @Value, Quantity = @Quantity, DateInit = @DateInit, Payed = @Payed ," +
                 " PayedParcel = @PayedParcel, QntPayed = @QntPayed, RemainingPay = @RemainingPay WHERE Id = @id";
             SqlCeCommand CMD = new SqlCeCommand(sql, ceConnection);
@@ -136,21 +136,12 @@ namespace SistemaGerenciadorInventario.Data
             try
             {
                 ceConnection.Open();
-
-                // Executar a primeira atualização (na tabela BuysTable)
-                int rowsAffected1 = CMD.ExecuteNonQuery();
-
-                // Executar a segunda atualização (na tabela Client)
-                int rowsAffected2 = CM2.ExecuteNonQuery();
-
-                if (rowsAffected1 > 0 && rowsAffected2 > 0)
+                if (CMD.ExecuteNonQuery() > 0 || CM2.ExecuteNonQuery() > 0)
                 {
-                    ceConnection.Close();
                     return true;
                 }
                 else
                 {
-                    ceConnection.Close();
                     return false;
                 }
             }
@@ -169,7 +160,7 @@ namespace SistemaGerenciadorInventario.Data
         {
             try
             {
-                string sql = "INSERT INTO BuysTable (CPF, Value, Quantity, DateInit, Name, Payed) VALUES (@CPF, @Value, @Quantity, @DateInit, @Name, @Payed)";
+                string sql = "INSERT INTO BuysTable (CPF, Value, Quantity, DateInit, Name, Payed, PayedParcel, RemainingPay) VALUES (@CPF, @Value, @Quantity, @DateInit, @Name, @Payed, @PayedParcel,@RemainingPay)";
                 SqlCeCommand CMD = new SqlCeCommand(sql, ceConnection);
                 CMD.Parameters.AddWithValue("@CPF", buy._Cliente.CPF);
                 SqlMoney total = buy._Item.Price * quantity;
@@ -178,6 +169,8 @@ namespace SistemaGerenciadorInventario.Data
                 CMD.Parameters.AddWithValue("@DateInit", buy.DataInit.ToString("dd/MM/yyyy"));
                 CMD.Parameters.AddWithValue("@Name", buy._Item.Name);
                 CMD.Parameters.AddWithValue("@Payed", 1);
+                CMD.Parameters.AddWithValue("@PayedParcel", buy.PayedParcel);
+                CMD.Parameters.AddWithValue("@RemainingPay", buy.RemainingPay);
                 int newQnt = buy._Item.Quantity - quantity;
                 bool updateStock = UpdateStock(buy._Item.Id, newQnt); ;
                 bool attQntBuy = InsertQntBuyItems(buy._Cliente, quantity);

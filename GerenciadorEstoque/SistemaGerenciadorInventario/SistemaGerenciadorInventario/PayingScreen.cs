@@ -7,8 +7,10 @@ using System.Windows.Forms;
 
 namespace SistemaGerenciadorInventario
 {
+
     public partial class PayingScreen : Form
     {
+        private SqlMoney RemainingP;
         BuyAcess buyAcess = new BuyAcess();
         private ResumeScreen resume;
         MainScreen mainScreen = new MainScreen();
@@ -50,10 +52,12 @@ namespace SistemaGerenciadorInventario
             numericUpDown1.Value = Convert.ToDecimal(buy.QntPayed);
             lblBuyQntPayed.Text = buy.QntPayed.ToString();
             txtRemaining.Text = buy.RemainingPay.ToString();
+            RemainingP = buy.RemainingPay;
+            lblValueParcel.Text = buy.PayedParcel.ToString();
             if (buy.RemainingPay.ToString() == "Null" || buy.RemainingPay == 0)
             {
                 btnOk.Visible = false;
-                txtRemaining.Text = "0";
+                txtRemaining.Text = "0,00";
             }
             lblValueParcel.Text = buy.PayedParcel.ToString();
             numericUpDown1.Maximum = int.Parse(lblBuyQntParcel.Text);
@@ -69,21 +73,46 @@ namespace SistemaGerenciadorInventario
                 {
 
                     numericUpDown1.Value = int.Parse(lblBuyQntParcel.Text);
-
+                    txtRemaining.Text = "0,00";
                 }
             }
 
         }
         public void ChangeSignature(object sender, EventArgs e)
         {
-            if(txtRemaining.Text != "")
+            if(lblValueParcel.Text == ".")
             {
-                SqlMoney value = SqlMoney.Parse(txtRemaining.Text);
-
-                int numeric = (int)numericUpDown1.Value;
-                SqlMoney newValue = value - (numeric * SqlMoney.Parse(lblValueParcel.Text));
-
+                SqlMoney aux = 0;
+                SqlMoney ValueParcel = aux;
+                int numeric = Convert.ToInt32(numericUpDown1.Value);
+                SqlMoney newValue = ValueParcel - (numeric * ValueParcel);
+                if (newValue > 0)
+                {
+                    txtRemaining.Text = newValue.ToString();
+                }
             }
+            else
+            {
+                SqlMoney ValueParcel = SqlMoney.Parse(lblValueParcel.Text);
+                int numeric = Convert.ToInt32(numericUpDown1.Value);
+                SqlMoney newValue = SqlMoney.Parse(lblBuyValue.Text) - (numeric * ValueParcel);
+                txtRemaining.Text = newValue.ToString();
+                if(txtRemaining.Text.Contains("-"))
+                {
+                    txtRemaining.Text = "0,00";
+                }
+                if(txtRemaining.Text == "0,00")
+                {
+                    lblBuyCheckPay.Checked = true;
+                }
+                if(txtRemaining.Text != "0,00")
+                {
+                    lblBuyCheckPay.Checked = false;
+                    lblBuyCheckNo.Checked = true;
+                }
+            }
+            
+
 
 
         }
@@ -94,6 +123,7 @@ namespace SistemaGerenciadorInventario
                 lblBuyCheckPay.Checked = false;
                 numericUpDown1.Value = 0;
                 numericUpDown1.Enabled = true;
+                txtRemaining.Text = RemainingP.ToString();
             }
 
         }
@@ -105,7 +135,7 @@ namespace SistemaGerenciadorInventario
             Item item = new Item();
             buy.Id = int.Parse(lblId.Text);
             client.CPF = lblClientCPF.Text;
-            client.Id = int.Parse(lblId.Text);  
+            client.Id = int.Parse(lblId.Text);
             buy._Cliente = client;
             buy.DataInit = DateTime.Parse(lblBuyDate.Text);
             buy.Value = SqlMoney.Parse(lblBuyValue.Text);
@@ -114,6 +144,8 @@ namespace SistemaGerenciadorInventario
             buy.Quantity = int.Parse(lblBuyQnt.Text);
             buy.QntParcel = int.Parse(lblBuyQntParcel.Text);
             buy.QntPayed = Convert.ToInt32(numericUpDown1.Value);
+            buy.RemainingPay = SqlMoney.Parse(txtRemaining.Text);
+            buy.PayedParcel = SqlMoney.Parse(lblValueParcel.Text);
             if (buy.QntPayed == buy.QntParcel)
             {
                 lblBuyCheckPay.Checked = true;

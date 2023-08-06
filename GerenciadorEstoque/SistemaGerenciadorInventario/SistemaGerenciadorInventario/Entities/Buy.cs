@@ -23,39 +23,7 @@ namespace SistemaGerenciadorInventario.Entities
         {
 
         }
-        public Buy(Client cliente, Item item, SqlMoney value, int quantity, DateTime dataInit, bool payed)
-        {
-
-            _Cliente = cliente;
-            _Item = item;
-            Value = value;
-            Quantity = quantity;
-            DataInit = dataInit;
-            Payed = payed;
-        }
-        public Buy(Client cliente, Item item, SqlMoney value, int quantity, DateTime dataInit, SqlMoney payedParcel, int qntParcel)
-        {
-
-            _Cliente = cliente;
-            _Item = item;
-            Value = value;
-            Quantity = quantity;
-            DataInit = dataInit;
-            PayedParcel = payedParcel;
-            QntParcel = qntParcel;
-
-        }
-        public Buy(Client cliente, Item item, SqlMoney value, int quantity, DateTime dataInit, int qntParcel)
-        {
-
-            _Cliente = cliente;
-            _Item = item;
-            Value = value;
-            Quantity = quantity;
-            DataInit = dataInit;
-            QntParcel = qntParcel;
-
-        }
+       
 
         public Buy(Client client, Item item, int quantity, DateTime now, SqlMoney price)
         {
@@ -65,20 +33,8 @@ namespace SistemaGerenciadorInventario.Entities
             DataInit = now;
             Value = price;
         }
-        public Buy(Client cliente, Item item, int quantity, DateTime dataInit, SqlMoney payedParcel, int qntParcel, int qntPayed, bool payed)
-        {
 
-            _Cliente = cliente;
-            _Item = item;
-            Quantity = quantity;
-            DataInit = dataInit;
-            PayedParcel = payedParcel;
-            QntParcel = qntParcel;
-            QntPayed = qntPayed;
-            Payed = payed;
-
-        }
-        public Buy(Client client, Item item, int quantity, DateTime dataInit, int qntPayed, int qntParcel, bool payed) // ParceledPay
+        public Buy(Client client, Item item, int quantity, DateTime dataInit, int qntPayed, int qntParcel, bool payed, SqlMoney remainingPay, SqlMoney payedParcel) // ParceledPay
         {
             _Cliente = client;
             _Item = item;
@@ -87,6 +43,8 @@ namespace SistemaGerenciadorInventario.Entities
             QntPayed = qntPayed;
             QntParcel = qntParcel;
             Payed = payed;
+            RemainingPay = remainingPay;
+            PayedParcel = payedParcel;
         }
     }
 }

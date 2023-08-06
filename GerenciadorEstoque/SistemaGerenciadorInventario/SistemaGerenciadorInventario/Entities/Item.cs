@@ -21,7 +21,7 @@ namespace SistemaGerenciadorInventario.Entities
         [Range(1, 8, ErrorMessage = "Escolha um tipo.")]
         public Type type { get; set; }
         public SqlMoney Total { get; set; }
-        public Item()
+       public Item()
         {
 
         }
